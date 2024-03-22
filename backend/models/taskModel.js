@@ -18,7 +18,12 @@ const taskSchema = new Schema({
     isCompleted: {
         type: Boolean, 
         required: true
+    }, 
+    user_id: {
+        type: String, 
+        required: true
     }
+
 }, {timestamps: true})
 
 module.exports = mongoose.model('Task', taskSchema)
