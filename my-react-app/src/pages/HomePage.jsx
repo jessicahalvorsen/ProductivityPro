@@ -1,16 +1,21 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 
 import TaskBox from '../components/TaskBox';
 
 const HomePage = () => {
   const [tasks, setTasks] = useState(null)
+  const {user} = useAuthContext()
 
   useEffect(() => {
     const fetchTasks = async () => {
-        const response = await fetch('/api/tasks')
-        console.log(response)
+        const response = await fetch('/api/tasks', {
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          }
+        })
         const json = await response.json()
 
         if(response.ok) {
@@ -18,7 +23,9 @@ const HomePage = () => {
         }
     }
 
-    fetchTasks()
+    if(user) {
+      fetchTasks()
+    }
   }, [])
 
   return (

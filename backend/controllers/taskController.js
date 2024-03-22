@@ -3,8 +3,9 @@ const mongoose = require('mongoose')
 
 // get all tasks 
 const getTasks = async (req, res) => {
+    const user_id = req.user._id
     // finds all tasks in the db and returns in descending order by create date
-    const tasks = await Task.find({}).sort({createdAt: -1})
+    const tasks = await Task.find({user_id}).sort({createdAt: -1})
 
     // returns all tasks 
     res.status(200).json(tasks)
@@ -38,7 +39,8 @@ const createTask = async (req, res) => {
 
     // add doc to db
     try {
-        const task = await Task.create({title, description, date, isCompleted})
+        const user_id = req.user._id
+        const task = await Task.create({title, description, date, isCompleted, user_id})
         res.status(200).json(task)
     } catch(error) {
         res.status(400).json({error: error.message})

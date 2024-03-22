@@ -6,7 +6,12 @@ const {
     deleteTask,
     updateTask
 } = require('../controllers/taskController')
+const requireAuth = require('../middleware/requireAuth')
+
+// require authentication for all routes 
 const router = express.Router()
+
+router.use(requireAuth)
 
 // GET all tasks 
 router.get('/', getTasks)
