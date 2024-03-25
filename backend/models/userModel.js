@@ -5,6 +5,14 @@ const validator = require('validator')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
+    firstName: {
+        type: String, 
+        required: true
+    }, 
+    lastName: {
+        type: String, 
+        required: true
+    },
     email: {
         type: String, 
         required: true, 
@@ -17,16 +25,16 @@ const userSchema = new Schema({
 })
 
 // static sign up method 
-userSchema.statics.signup = async function(email, password) {
+userSchema.statics.signup = async function(firstName, lastName, email, password) {
     // validate email and password 
-    if(!email || !password){
+    if(!firstName || !lastName || !email || !password){
         throw Error('All fields must be filled')
     }
     if(!validator.isEmail(email)){
         throw Error('Not a valid email')
     }
     if (!validator.isStrongPassword(password)) {
-        throw Error('Password not strong enough')
+        throw Error('Password must include uppercase character, number, special character and be 8 characters or longer')
     }
 
     // make sure the email is not already in use 
@@ -40,7 +48,7 @@ userSchema.statics.signup = async function(email, password) {
     const hash = await bcrypt.hash(password, salt)
 
     // create user with email and hashed password 
-    const user = await this.create({email, password:hash})
+    const user = await this.create({firstName, lastName, email, password:hash})
 
     return user
 }

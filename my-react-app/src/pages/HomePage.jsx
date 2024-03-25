@@ -1,12 +1,14 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useTaskContext } from '../hooks/useTaskContext'; 
 
 
 import TaskBox from '../components/TaskBox';
+import TaskForm from '../components/TaskForm'; 
 
 const HomePage = () => {
-  const [tasks, setTasks] = useState(null)
+  const {tasks, dispatch} = useTaskContext()
   const {user} = useAuthContext()
 
   useEffect(() => {
@@ -19,7 +21,7 @@ const HomePage = () => {
         const json = await response.json()
 
         if(response.ok) {
-            setTasks(json)
+            dispatch({type: 'SET_TASKS', payload: json})
         }
     }
 
@@ -42,9 +44,7 @@ const HomePage = () => {
                 ))}
             </div>
         </div>
-        <div className="w-1/3 p-8 bg-gray-100">
-            <h2 className="text-left font-bold opacity-50 mb-4">CREATE TASK:</h2>
-        </div>
+        <TaskForm/>
       </div>
     </div>
   )
