@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import EditTaskPage from './pages/EditTaskPage'
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={user ? <HomePage /> : <Navigate to="/login"/>} />
         <Route path="/about" element={user ? <AboutPage /> : <Navigate to="/login"/>} />
+        <Route path="/edit-task" element={user ? <EditTaskPage /> : <Navigate to="/login"/>} />
         <Route path="/login" element={!user ? <Login /> : <Navigate to="/"/>} />
         <Route path="/signup" element={!user ? <SignUp /> : <Navigate to="/"/>} />
       </Routes>
