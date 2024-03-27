@@ -9,7 +9,7 @@ export const useEditTaskPage = () => {
     const {user} = useAuthContext()
     const {dispatch} = useTaskContext()
 
-    const editTask = async (task, newTask) => {
+    const editTask = async (task, updatedTask) => {
         setIsLoading(true)
         setError(null)
 
@@ -20,7 +20,7 @@ export const useEditTaskPage = () => {
 
         const response = await fetch('/api/tasks/'+ task._id, {
             method: 'PATCH', 
-            body: JSON.stringify(newTask), 
+            body: JSON.stringify(updatedTask), 
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${user.token}`

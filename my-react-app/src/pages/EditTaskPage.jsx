@@ -8,19 +8,27 @@ const EditTaskPage = () => {
     const navigate = useNavigate()
     const task = location.state.task
 
-    const [title, setTitle] = useState(task.title || '')
+    const [title, setTitle] = useState(task.title)
     const [description, setDescription] = useState(task.description || '')
-    const [date, setDate] = useState(task.date || '')
-    const [isCompleted, setIsCompleted] = useState(task.isCompleted || '')
+    const [date, setDate] = useState(task.date)
+
+    const [inputError, setInputError] = useState(null)
     const {editTask, error, isLoading} = useEditTaskPage()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const newTask = {title, description, date, isCompleted}
+        if(!title) {
+            setInputError('Title is required.')
+            return
+        }
+        if(!date) {
+            setInputError('Date is required.')
+            return
+        }
 
-        await editTask(task, newTask)
-
+        const updatedTask = {title, description, date}
+        await editTask(task, updatedTask)
         navigate('/')
     }
 
@@ -49,14 +57,9 @@ const EditTaskPage = () => {
                 value={date}
             />
 
-            <label>Completion:</label>
-            <input
-                type="text"
-                onChange={(e) => setIsCompleted(e.target.value)}
-                value={isCompleted}
-            />
             <button disabled={isLoading}>UPDATE TASK</button>
             {error && <div className="error">{error}</div>}
+            {inputError && <div className="input-error">{inputError}</div>}
         </form>
     )
 }
