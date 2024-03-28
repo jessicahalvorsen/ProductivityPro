@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import { useAuthContext } from './hooks/useAuthContext';
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Sidebar from './components/SideBar';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import Login from './pages/Login';
@@ -15,7 +16,6 @@ function App() {
 
   return (
     <Router>
-      <Header />
       <Routes>
         <Route path="/" element={user ? <HomePage /> : <Navigate to="/login"/>} />
         <Route path="/about" element={user ? <AboutPage /> : <Navigate to="/login"/>} />
@@ -23,7 +23,6 @@ function App() {
         <Route path="/login" element={!user ? <Login /> : <Navigate to="/"/>} />
         <Route path="/signup" element={!user ? <SignUp /> : <Navigate to="/"/>} />
       </Routes>
-      <Footer />
     </Router>
   );
 }
