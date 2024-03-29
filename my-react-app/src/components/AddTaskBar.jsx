@@ -39,7 +39,7 @@ const AddTaskBar = () => {
             setTitle('')
             setDescription('')
             setDate('')
-            setIsCompleted('')
+            setIsCompleted(0)
             setError(null)
             console.log('new task added', json)
             dispatch({type: 'CREATE_TASK', payload: json})

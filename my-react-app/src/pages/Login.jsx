@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom';
 import { useState } from 'react'
 import { useLogin } from '../hooks/useLogin'
 
@@ -58,6 +58,7 @@ const Login = () => {
             </div>
 
             <div>
+                <Link to="/signup" className="text-sm opacity-70">Signup</Link>
                 {/* add Sign up Button*/}
             </div>
         </div>
