@@ -19,14 +19,14 @@ function Header() {
           <span>{user.email}</span>
           <button onClick={handleClick}>Logout</button>
           <Link to="/">
-            <h1 className="text-left font-bold">PRODUCTITYPRO</h1>
+            <h1 className="text-left font-bold">PRODUCTIVITYPRO</h1>
           </Link>
         </div>
       )}
       {!user && (
         <div className="flex justify-between items-center">
           <Link to="/">
-            <h1 className="text-left font-bold">PRODUCTITYPRO</h1>
+            <h1 className="text-left font-bold">PRODUCTIVITYPRO</h1>
           </Link>
           <Link to="/login" className="text-sm opacity-70">Login</Link>
           <Link to="/signup" className="text-sm opacity-70">Signup</Link>
