@@ -93,6 +93,33 @@ const updateTask = async(req, res) => {
 
 }
 
+const updateTask = async (req, res) => {
+    const { id } = req.params;
+
+    // make sure the id is valid
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such task' });
+    }
+
+    try {
+        // Find the task by ID
+        let task = await Task.findById(id);
+
+        // If the task doesn't exist, return an error
+        if (!task) {
+            return res.status(404).json({ error: 'No such task' });
+        }
+
+        // Update the task with the new data, including marking as completed
+        task = await Task.findByIdAndUpdate(id, { ...req.body, isCompleted: true }, { new: true });
+
+        // Return the updated task
+        
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
 module.exports = {
     getTasks, 
     getTask,
