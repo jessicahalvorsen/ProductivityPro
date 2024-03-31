@@ -19,9 +19,11 @@ const Login = () => {
             <div className="relative">
                 <div className="bg-app-lightGray rounded-lg p-8 w-96 h-96 flex justify-center items-center">
                     <form className='login' onSubmit={handleSubmit}>
-                        <h3 className="text-lg absolute top-0 left-0 mb-4 p-8">WELCOME</h3>
+                        {/* Welcome Sign */}
+                        <h3 className="text-lg absolute top-0 left-0 p-8">WELCOME</h3>
     
-                        <div className="mt-12">
+                        {/* Email */}
+                        <div className="mt-16">
                             <label className="text-sm leading-snug py-1.5 px-3 mx-1 opacity-50 ml-6">EMAIL</label>
                             <div className="flex justify-center items-center">
                                 <input
@@ -33,6 +35,7 @@ const Login = () => {
                             </div>
                         </div>
                         
+                        {/* Password */}
                         <div className='mt-4'>
                             <label className="text-sm leading-snug py-1.5 px-3 mx-1 opacity-50 ml-6">PASSWORD</label>
                             <div className="flex justify-center items-center">
@@ -45,7 +48,16 @@ const Login = () => {
                             </div>
                         </div>
 
-                        <div className="mt-8 w-full flex justify-center items-center">
+                        {/* Sign-Up Link */}
+                        <div className="mt-4 flex justify-center items-center">
+                            <label className = "text-sm opacity-50">New User?</label>
+                            &nbsp;
+                            {/* can change formatting to be better*/}
+                            <Link to="/signup" className="text-sm">SIGN UP</Link>
+                        </div>
+
+                        {/* Log-In Button */}
+                        <div className="mt-6 w-full flex justify-center items-center">
                             <button className="rounded bg-app-mediumGreen text-white px-32 py-6" disabled={isLoading}>LOG IN</button>
                         </div>
                         {error && <div className="error">{error}</div>}
@@ -53,13 +65,15 @@ const Login = () => {
                 </div>
             </div>
     
+            {/* Productivity Pro Header Text */}
             <div className="absolute top-0 left-0 p-4">
                 <p className="text-left font-bold text-xl w-10 leading-snug mb-5">PRODUCTIVITY PRO</p>
             </div>
 
-            <div>
-                <Link to="/signup" className="text-sm opacity-70">Signup</Link>
-                {/* add Sign up Button*/}
+            {/* About Link */}
+            <div className="absolute bottom-0 right-0 p-6">
+                {/* Needs to link to about page */}
+                <Link to="/about" className="text-sm opacity-50">ABOUT</Link>
             </div>
         </div>
     );
