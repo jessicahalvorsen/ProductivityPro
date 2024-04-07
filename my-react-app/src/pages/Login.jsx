@@ -60,10 +60,19 @@ const Login = () => {
                         <div className="mt-6 w-full flex justify-center items-center">
                             <button className="rounded bg-app-mediumGreen text-white px-32 py-6" disabled={isLoading}>LOG IN</button>
                         </div>
-                        {error && <div className="error">{error}</div>}
                     </form>
                 </div>
+
+                {/* Error Handling (can be changed to something that looks better)*/}
+                {error && 
+                <div className="error absolute top-[calc(100% + 40px)] left-1/2 transform -translate-x-1/2 w-full flex justify-center items-center mt-2">
+                    {error}
+                </div>}
             </div>
+
+            
+            
+
     
             {/* Productivity Pro Header Text */}
             <div className="absolute top-0 left-0 p-4">
@@ -73,7 +82,9 @@ const Login = () => {
             {/* About Link */}
             <div className="absolute bottom-0 right-0 p-6">
                 {/* Needs to link to about page */}
-                <Link to="/about" className="text-sm opacity-50">ABOUT</Link>
+                <Link to="/about">
+                    <p className="text-sm opacity-50">ABOUT</p>
+                </Link>
             </div>
         </div>
     );
