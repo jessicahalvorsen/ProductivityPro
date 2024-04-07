@@ -19,7 +19,7 @@ const SignUp = () => {
         <div className='flex justify-center items-center h-screen'>
             <div className='relative flex justify-center items-center'>
                 {/*  App Promotion Text */}
-                <div className='mr-4'>
+                <div className='mr-16'>
                     <div className=''>
                         {/* "Get More Done" Text */}
                         <p className='font-bold text-xl word-wrap break-word w-64 leading-snug mb-4'>
@@ -39,12 +39,12 @@ const SignUp = () => {
                         <form className='signup' onSubmit={handleSubmit}>
 
                             {/* Welcome Sign */}
-                            <h3 className="text-lg mb-6 ml-2">WELCOME</h3>
+                            <h3 className="text-lg mb-6">WELCOME</h3>
 
                             {/* Name Boxes */}
                             <div className='flex'>
                                 {/* First Name Box */}
-                                <div className='mr-4 ml-4'>
+                                <div className=''>
                                     <label className="text-sm leading-snug opacity-50">FIRST NAME</label>
                                     <div>
                                         <input
@@ -57,7 +57,7 @@ const SignUp = () => {
                                 </div>
 
                                 {/* Last Name Box */}
-                                <div>
+                                <div className='ml-auto'>
                                     <label className="text-sm leading-snug opacity-50">LAST NAME</label>
                                     <div>
                                         <input
@@ -113,7 +113,7 @@ const SignUp = () => {
 
                     {/* Error Handling (can be changed to something that looks better) */}
                     {error && 
-                        <div className="error absolute top-full left-1/2 transform -translate-x-1/3 w-full flex justify-center items-center mt-2 ml-3">
+                        <div className="error absolute top-full left-1/2 transform -translate-x-1/3 w-full flex justify-center items-center mt-2 ml-8">
                             {error}
                         </div>}
                 </div>
