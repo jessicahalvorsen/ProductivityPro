@@ -34,7 +34,7 @@ const Task = ({task}) => {
     return (
         <div className="my-4 p-5 bg-app-lightGray w-full flex ">
             <div className="mx-3 my-auto">
-                <CheckBox />
+                <CheckBox key={task._id} task={task}/>
             </div>
             <div className="w-5/6">
                 <h1 className="text-sm font-bold w-full text-left">{task.title}</h1>
