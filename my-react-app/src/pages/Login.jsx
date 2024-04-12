@@ -60,6 +60,7 @@ const Login = () => {
             <div>
                 <Link to="/signup" className="text-sm opacity-70">Signup</Link>
                 {/* add Sign up Button*/}
+                <Link to="/signup" className="text-sm opacity-70">Signup</Link>
             </div>
         </div>
     );
