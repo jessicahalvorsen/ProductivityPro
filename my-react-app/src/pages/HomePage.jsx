@@ -7,8 +7,6 @@ import Sidebar from '../components/SideBar';
 import Heatmap from './HeatmapPage';
 import TodoPage from './TodoPage';
 import AddTaskBar from '../components/AddTaskBar';
-import TaskBox from '../components/TaskBox';
-import TaskForm from '../components/TaskForm'; 
 
 const HomePage = () => {
   const {tasks, dispatch} = useTaskContext()
