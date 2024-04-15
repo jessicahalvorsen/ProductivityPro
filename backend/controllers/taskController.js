@@ -67,7 +67,18 @@ const createTask = async (req, res) => {
         const task = await Task.create({title, description, date, isCompleted, user_id})
         res.status(200).json(task)
     } catch(error) {
-        res.status(400).json({error: error.message})
+        if(!title && !date){
+            res.status(400).json({error: 'Title and date are required.'})
+        }
+        else if(!title){
+            res.status(400).json({error: 'Title is required.'})
+        }
+        else if(!date){
+            res.status(400).json({error: 'Date is required.'})
+        }
+        else {
+            res.status(400).json({error: error.message})
+        }
     }
 }
 
