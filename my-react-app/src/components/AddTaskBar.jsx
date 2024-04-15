@@ -10,7 +10,7 @@ const AddTaskBar = () => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [date, setDate] = useState('')
-    const [isCompleted, setIsCompleted] = useState(0)
+    const [isCompleted, setIsCompleted] = useState(false)
     const [error, setError] = useState(null)
 
     const handleSubmit = async (e) => {
@@ -39,7 +39,7 @@ const AddTaskBar = () => {
             setTitle('')
             setDescription('')
             setDate('')
-            setIsCompleted('')
+            setIsCompleted(false)
             setError(null)
             console.log('new task added', json)
             dispatch({type: 'CREATE_TASK', payload: json})

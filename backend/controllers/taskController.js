@@ -11,6 +11,30 @@ const getTasks = async (req, res) => {
     res.status(200).json(tasks)
 }
 
+const getTasksByDate = async (req, res) => {
+    const user_id = req.user._id;
+    try {
+        // Find all tasks for the user
+        const tasks = await Task.find({ user_id });
+
+        // Organize tasks by date
+        const tasksByDate = tasks.reduce((tasksOnDate, task) => {
+            const dateId = task.date.toISOString().split('T')[0]
+            if (!tasksOnDate[dateId]) {
+                tasksOnDate[dateId] = [];
+            }
+            tasksOnDate[dateId].push(task);
+            return tasksOnDate;
+        }, {});
+
+        // Return tasks organized by date
+        res.status(200).json(tasksByDate);
+    } catch (error) {
+        // Handle any errors that occur during the database query
+        res.status(500).json({ error: error.message });
+    }
+};
+
 // get a single task 
 const getTask = async (req, res) => {
     const {id} = req.params
@@ -98,5 +122,6 @@ module.exports = {
     getTask,
     createTask, 
     deleteTask, 
-    updateTask
+    updateTask,
+    getTasksByDate
 }
