@@ -2,14 +2,6 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/userModel')
 
 const requireAuth = async (req, res, next) => {
-  // Bypass if DEBUG_ID is defined
-  const debug_id = process.env.DEBUG_ID;
-  if (debug_id !== undefined) {
-    req.user = await User.findOne({ _id: debug_id }).select('_id')
-    next()
-    return
-  }
-  
   // verify user is authenticated
   const { authorization } = req.headers
 
