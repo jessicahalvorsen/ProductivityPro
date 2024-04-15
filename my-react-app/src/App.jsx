@@ -9,6 +9,7 @@ import AboutPage from './pages/AboutPage';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import EditTaskPage from './pages/EditTaskPage'
+import HeatmapPage from './pages/HeatmapPage'
 import './App.css';
 
 function App() {
@@ -17,11 +18,12 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={user ? <HomePage /> : <Navigate to="/login"/>} />
         <Route path="/about" element={user ? <AboutPage /> : <Navigate to="/login"/>} />
         <Route path="/edit-task" element={user ? <EditTaskPage /> : <Navigate to="/login"/>} />
         <Route path="/login" element={!user ? <Login /> : <Navigate to="/"/>} />
         <Route path="/signup" element={!user ? <SignUp /> : <Navigate to="/"/>} />
+        <Route path="/map" element={user ? <HeatmapPage /> : <Navigate to="/login"/>} />
+        <Route path="/" element={user ? <HomePage /> : <Navigate to="/login"/>} />
       </Routes>
     </Router>
   );

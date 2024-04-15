@@ -4,7 +4,8 @@ const {
     getTask,
     createTask, 
     deleteTask,
-    updateTask
+    updateTask,
+    getTasksByDate
 } = require('../controllers/taskController')
 const requireAuth = require('../middleware/requireAuth')
 
@@ -27,5 +28,8 @@ router.delete('/:id', deleteTask)
 
 // UPDATE a task
 router.patch('/:id', updateTask)
+
+// get tasks by date
+router.get('/date-object/:id', getTasksByDate)
 
 module.exports = router
