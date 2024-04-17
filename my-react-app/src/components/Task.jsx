@@ -37,8 +37,12 @@ const Task = ({task}) => {
                 <CheckBox key={task._id} task={task}/>
             </div>
             <div className="w-5/6">
-                <h1 className="text-sm font-bold w-full text-left">{task.title}</h1>
-                <p className="text-xs opacity-50 self-end">{task.description}</p>
+            <h1 className="text-sm font-bold w-full text-left">
+                {new Date(task.date).toISOString().split('T')[0] /* Extract only the date part */}
+                {' '}
+                {task.title}
+            </h1>
+            <p className="text-xs opacity-50 self-end">{task.description}</p>
             </div>
             <div className="w-1/6 flex justify-end">
                 <button className="text-xs opacity-50 mr-4 self-end" onClick={handleEditClick}>EDIT</button>
