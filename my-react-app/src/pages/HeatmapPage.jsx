@@ -2,9 +2,7 @@ import React from "react";
 import Sidebar from '../components/SideBar';
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
-import { useTaskContext } from '../hooks/useTaskContext';
-import AddTaskBar from "../components/AddTaskBar";
-import Task from "../components/Task";
+
 
 const HeatmapPage = () => {
     const [tasksByDate, setTasksByDate] = useState(undefined)
@@ -93,5 +91,6 @@ function range(count) {
 function dayToMilliseconds(days) {
     return days * 1000 * 60 * 60 * 24
 }
+
 
 export default HeatmapPage;
