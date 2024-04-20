@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useTaskContext } from "../hooks/useTaskContext";
 
-const CheckBox = ({task}) => {
+const CheckBox = ({task, onToggle}) => {
     const [isCompleted, setIsCompleted] = useState(task.isCompleted);
     const {user} = useAuthContext()
     const {dispatch} = useTaskContext()
@@ -31,6 +31,7 @@ const CheckBox = ({task}) => {
         if(response.ok){
             console.log('task edited', json)
             dispatch({type: 'UPDATE_TASK', payload: json})
+            onToggle()
         }
     };
 
