@@ -4,12 +4,15 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import { useTaskContext } from '../hooks/useTaskContext';
 import AddTaskBar from "../components/AddTaskBar";
 import Task from "../components/Task";
+import CheckBox from "../components/CheckBox";
 
 
 const TodoPage = () => {
     const {tasks, dispatch} = useTaskContext()
     const [tasksByDate, setTasksByDate] = useState(undefined)
     const {user} = useAuthContext()
+    const [toggle, setToggle] = useState(false)
+
     useEffect(() => {
         const fetchTasks = async () => {
             const response = await fetch('/api/tasks', {
@@ -18,7 +21,6 @@ const TodoPage = () => {
               }
             })
             const json = await response.json()
-            console.log(json)
             if(response.ok) {
                 dispatch({type: 'SET_TASKS', payload: json})
             }
@@ -37,14 +39,18 @@ const TodoPage = () => {
         .catch(() => setTasksByDate(null))
         .then(response => response.json())
         .then(tasks => setTasksByDate(tasks))
-     }, [])
+     }, [toggle])
+
+     const handleToggle = () => {
+        setToggle(!toggle)
+     }
      
-    
     const today = new Date().toISOString().split('T')[0];
     const todayTasks = tasksByDate ? tasksByDate[today] ?? [] : [];
     const total = todayTasks.length;
     const complete = todayTasks.filter(task => task.isCompleted).length;
     const progress = total === 0 ? 0 : Math.round(100 * complete / total);
+
     let color = {
         background: "bg-app-mediumGreen",
         progress: "bg-app-green",
@@ -79,10 +85,16 @@ const TodoPage = () => {
                         <p className="text-black font-bold left-0 absolute p-2 pr-5">{`${today}`}</p>
                         {!isNaN(progress) && <p className="text-black font-bold right-0 absolute p-2 pr-5">{progress}%</p>}
                     </div>
-                    <p className="text-left text-sm font-bold py-1.5">TASKS</p>
+                    <p className="text-left text-sm font-bold py-1.5">TO DO:</p>
                     <div>
-                        {tasks && tasks.map((task) => (
-                            <Task key={task._id} task={task}/>
+                        {tasks && tasks.filter(task => !task.isCompleted).map(task => (
+                            <Task key={task._id} task={task} onToggle={handleToggle}/>
+                        ))}
+                    </div>
+                    <p className="text-left text-sm font-bold py-1.5">COMPLETED:</p>
+                    <div>
+                        {tasks && tasks.filter(task => task.isCompleted).map(task => (
+                            <Task key={task._id} task={task} onToggle={handleToggle}/>
                         ))}
                     </div>
                 </div>

@@ -5,7 +5,8 @@ const mongoose = require('mongoose')
 const getTasks = async (req, res) => {
     const user_id = req.user._id
     // finds all tasks in the db and returns in descending order by create date
-    const tasks = await Task.find({user_id}).sort({createdAt: -1})
+    const tasks = await Task.find({ user_id}).sort({ date: -1 });
+    
 
     // returns all tasks 
     res.status(200).json(tasks)

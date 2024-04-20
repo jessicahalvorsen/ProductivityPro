@@ -4,7 +4,7 @@ import { useTaskContext } from '../hooks/useTaskContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import CheckBox from './CheckBox';
 
-const Task = ({task}) => {
+const Task = ({task, onToggle}) => {
     const navigate = useNavigate()
     const {dispatch} = useTaskContext()
     const { user } = useAuthContext()
@@ -31,10 +31,14 @@ const Task = ({task}) => {
         }
     }
 
+    const handleToggle = () => {
+        onToggle()
+     }
+
     return (
         <div className="my-4 p-5 bg-app-lightGray w-full flex ">
             <div className="mx-3 my-auto">
-                <CheckBox key={task._id} task={task}/>
+                <CheckBox key={task._id} task={task} onToggle={handleToggle}/>
             </div>
             <div className="w-5/6">
             <h1 className="text-sm font-bold w-full text-left">
