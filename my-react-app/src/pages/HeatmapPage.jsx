@@ -2,12 +2,14 @@ import React from "react";
 import Sidebar from '../components/SideBar';
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useNavigate} from 'react-router-dom'
 
 
 const HeatmapPage = () => {
     const [tasksByDate, setTasksByDate] = useState(undefined)
     const {user} = useAuthContext()
-
+    const navigate = useNavigate()
+    
     useEffect(() => {
         fetch('/api/tasks/date-object/0', {
             method: 'GET',
@@ -21,6 +23,10 @@ const HeatmapPage = () => {
         .then(tasks => setTasksByDate(tasks))
     }, [])
 
+    const handleTasksClick = async (date) => {
+        navigate('/show-tasks', { state: { isoDate: date } })
+    }
+
     const now = Date.now()
     const history = range(14)
         .map(offset => now - dayToMilliseconds(offset))
@@ -33,7 +39,7 @@ const HeatmapPage = () => {
             const progress = Math.round(100 * complete / total);
             const month = isoDate.split('-')[1]
             const day = isoDate.split('-')[2]
-            return { progress, month, day }
+            return { progress, month, day, isoDate }
         })
 
     return (
@@ -72,7 +78,8 @@ const HeatmapPage = () => {
                                 <div className={`${color.background} w-full h-10 rounded-full absolute`}></div>
                                 <div className={`${color.progress} h-10 rounded-full absolute`} style={{width:entry.progress+"%"}}></div>
                                 <p className="text-black font-bold left-0 absolute p-2 pr-5">{`${entry.month}/${entry.day}`}</p>
-                                {!isNaN(entry.progress) && <p className="text-black font-bold right-0 absolute p-2 pr-5">{entry.progress}%</p>}
+                                {!isNaN(entry.progress) && <p className="text-black font-bold right-20 absolute p-2 pr-5">{entry.progress}%</p>}
+                                <button className="text-black font-bold right-0 absolute p-2 pr-5" onClick={() => handleTasksClick(entry.isoDate)}>TASKS</button>
                             </div>
                         }
                     )}

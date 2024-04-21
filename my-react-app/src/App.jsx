@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import EditTaskPage from './pages/EditTaskPage'
 import HeatmapPage from './pages/HeatmapPage'
+import ShowTasksPage from './pages/showTasksPage';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/login" element={!user ? <Login /> : <Navigate to="/"/>} />
         <Route path="/signup" element={!user ? <SignUp /> : <Navigate to="/"/>} />
         <Route path="/map" element={user ? <HeatmapPage /> : <Navigate to="/login"/>} />
+        <Route path="/show-tasks" element={user ? <ShowTasksPage /> : <Navigate to="/login"/>} />
         <Route path="/" element={user ? <HomePage /> : <Navigate to="/login"/>} />
       </Routes>
     </Router>
