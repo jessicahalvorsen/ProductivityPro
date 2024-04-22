@@ -75,15 +75,13 @@ const HeatmapPage = () => {
                                 }
                             }
                             return <div key={`${entry.month}/${entry.day}`} className="m-6 h-10 relative">
-                                <div className={`${color.background} w-full h-10 rounded-full absolute`}></div>
-                                <div className={`${color.progress} h-10 rounded-full absolute`} style={{width:entry.progress+"%"}}></div>
+                                <div className={`${color.background} w-full h-10 rounded-full absolute`} onClick={() => handleTasksClick(entry.isoDate)}></div>
+                                <div className={`${color.progress} h-10 rounded-full absolute`} style={{width:entry.progress+"%"}} onClick={() => handleTasksClick(entry.isoDate)}></div>
                                 <p className="text-black font-bold left-0 absolute p-2 pr-5">{`${entry.month}/${entry.day}`}</p>
-                                {!isNaN(entry.progress) && <p className="text-black font-bold right-20 absolute p-2 pr-5">{entry.progress}%</p>}
-                                <button className="text-black font-bold right-0 absolute p-2 pr-5" onClick={() => handleTasksClick(entry.isoDate)}>TASKS</button>
+                                {!isNaN(entry.progress) && <p className="text-black font-bold right-0 absolute p-2 pr-5">{entry.progress}%</p>}
                             </div>
                         }
                     )}
-                    <p className="text-left text-sm font-bold py-1.5">STATISTICS</p>
                 </div>
             </div>
         </>

@@ -31,7 +31,6 @@ const ShowTasksPage = () => {
         }
     }, [])
 
-    //TODO Fix this so that the date matches the format stored in
     const formatDate = date + "T00:00:00.000Z"
     const dateTasks = tasks.filter(task => task.date == formatDate)
     console.log(formatDate)
@@ -46,21 +45,36 @@ const ShowTasksPage = () => {
 
     return (
         <div className="w-7/12">
-                <p className="text-left text-sm leading-snug py-1.5 ml-8 mt-8 m-1 font-bold opacity-50">TASKS FOR {date}</p>
-                    <div className="m-6 h-10 relative">
+            <p className="text-left text-sm leading-snug py-1.5 ml-8 mt-8 m-1 font-bold opacity-50">TASKS FOR {date}</p>
+                <div className="m-6 h-10 relative">
+                {dateTasks.length > 0 ? (
+                <>
                     <p className="text-left text-sm font-bold py-1.5">LEFT UNFINISHED:</p>
                     <div>
-                        {dateTasks && dateTasks.filter(task => !task.isCompleted).map(task => (
-                            <Task key={task._id} task={task}/>
-                        ))}
+                        {dateTasks.filter(task => !task.isCompleted).length === 0 ? (
+                            <p className="text-sm font-bold w-full text-left">All tasks complete this day!</p>
+                        ) : (
+                            dateTasks.filter(task => !task.isCompleted).map(task => (
+                                <Task key={task._id} task={task}/>
+                            ))
+                        )}
                     </div>
                     <p className="text-left text-sm font-bold py-1.5">COMPLETED:</p>
                     <div>
-                        {dateTasks && dateTasks.filter(task => task.isCompleted).map(task => (
-                            <Task key={task._id} task={task}/>
-                        ))}
+                        {dateTasks.filter(task => task.isCompleted).length === 0 ? (
+                            <p className="text-sm font-bold w-full text-left">No tasks completed this day.</p>
+                        ) : (
+                             dateTasks.filter(task => task.isCompleted).map(task => (
+                                <Task key={task._id} task={task}/>
+                            ))
+                        )}
                     </div>
-                </div>
+                </>
+            ) : (
+                <p className="text-left text-sm font-bold py-1.5">Nothing to see here!</p>
+            )}
+
+            </div>
                 <button className="text-black font-bold right-0 absolute p-2 pr-5" onClick={handleBack}>BACK</button>
             </div>
     )
