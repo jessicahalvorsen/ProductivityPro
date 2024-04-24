@@ -33,9 +33,71 @@ const EditTaskPage = () => {
     }
 
     return (
-        <form className='edit-task' onSubmit={handleSubmit}>
-            <h3>Edit Task</h3>
+        <div className="flex justify-center items-center h-screen">
+            <div className="relative">
+                <div className="bg-app-lightGray rounded-lg p-8 w-96 h-96 flex justify-center items-center">
+                    <form className='edit-task' onSubmit={handleSubmit}>
+                        {/* Edit Task Sign */}
+                        <h3 className="text-lg absolute top-0 left-0 p-8">Edit Task</h3>
+    
+                        {/* Title */}
+                        <div className="mt-12">
+                            <label className="text-sm leading-snug py-1.5 px-3 mx-1 opacity-50 ml-4">Title</label>
+                            <div className="flex justify-center items-center">
+                                <input
+                                    type="text"
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    value={title}
+                                    className="rounded bg-app-mediumGray px-3 py-2 outline-none"
+                                />
+                            </div>
+                        </div>
+                        
+                        {/* Description */}
+                        <div className='mt-4'>
+                            <label className="text-sm leading-snug py-1.5 px-3 mx-1 opacity-50 ml-4">Description</label>
+                            <div className="flex justify-center items-center">
+                                <input
+                                    type="text"
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    value={description}
+                                    className="rounded bg-app-mediumGray px-3 py-2 outline-none"
+                                />
+                            </div>
+                        </div>
 
+                        {/* Date */}
+                        <div className='mt-4'>
+                            <label className="text-sm leading-snug py-1.5 px-3 mx-1 opacity-50 ml-4">Date</label>
+                            <div className='flex justify-center items-center'>
+                                <input
+                                    type="date"
+                                    onChange={(e) => setDate(e.target.value)}
+                                    value={date}
+                                    className='bg-app-lightGray' 
+                                />
+                            </div>
+                        </div>
+
+                        {/* Update Task Button */}
+                        <div className="mt-6 w-full flex justify-center items-center">
+                            <button className="rounded bg-app-mediumGreen text-white px-32 py-2" disabled={isLoading}>UPDATE TASK</button>
+                        </div>
+                    </form>
+                </div>
+
+                {/* Error Handling (can be changed to something that looks better)*/}
+                {error && <div className="error">{error}</div>}
+                {inputError && <div className="input-error">{inputError}</div>}
+                {error && 
+                <div className="error absolute top-[calc(100% + 40px)] left-1/2 transform -translate-x-1/2 w-full flex justify-center items-center mt-2">
+                    {error}
+                </div>}
+            
+            </div>
+        </div>
+    );
+    {/*}
             <label>Title:</label>
             <input
                 type="text"
@@ -61,7 +123,7 @@ const EditTaskPage = () => {
             {error && <div className="error">{error}</div>}
             {inputError && <div className="input-error">{inputError}</div>}
         </form>
-    )
+                */}
 }
 
 export default EditTaskPage
