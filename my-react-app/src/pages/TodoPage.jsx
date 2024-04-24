@@ -75,7 +75,7 @@ const TodoPage = () => {
     return (
         <>
             <div className="w-7/12">
-                <p className="text-left text-sm leading-snug py-1.5 ml-8 mt-8 m-1 font-bold opacity-50">TODO LIST</p>
+                <p className="text-left text-sm leading-snug py-1.5 ml-8 mt-8 m-1 font-bold opacity-50">TO-DO LIST</p>
                 <div className="mx-8 p-8">
                     <p className="text-left text-sm font-bold py-1.5">PROGRESS TODAY</p>
                     <div className="m-6 h-10 relative">
